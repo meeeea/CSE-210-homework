@@ -4,6 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Learning02 World!");
+        Resume resume = new Resume("Bob");
+        resume._jobs.Add(new Job("Disney", "Animator", 1930, 2010));
+        resume._jobs.Add(new Job("East India Trading Company", "Plantation Manager", 1500, 1530));
+        resume.display();
     }
 }
