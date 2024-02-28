@@ -1,5 +1,7 @@
 using System;
 
+// for go above and beyond, I did fun colors when printing your journal.
+
 class Program
 {
     public static Journal journal = new Journal();
