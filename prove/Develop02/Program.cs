@@ -44,7 +44,8 @@ class Program
         Console.WriteLine("'quit' : Exit the program.");
         Console.WriteLine("'journal' : Display journal.");
         Console.WriteLine("'save' : Saves journal");
-        Console.WriteLine("'add' : dds an entery to your journal.\n");
+        Console.WriteLine("'add' : Adds an entery to your journal.\n");
+        Console.WriteLine("'load' : Loads a journal from selected location.");
     }
 
     static void quit() {
@@ -58,7 +59,11 @@ class Program
     }
 
     static void OpenJournal() {
-        journal = ReaderWriter.ReadJournal();
+        Console.WriteLine("File Name: ");
+
+        string fileName = Console.ReadLine(); 
+
+        journal = ReaderWriter.ReadJournal(fileName);
     }
 
     static void DisplayJournal() {
@@ -67,21 +72,28 @@ class Program
     }
 
     static void AddEntery() {
-        List<string> propmts = ReaderWriter.ReadPrompts();
+        List<string> prompts = ReaderWriter.ReadPrompts();
+
+        string prompt = prompts[new Random().Next(prompts.Count)];
         
-        Console.WriteLine(propmts[new Random().Next(propmts.Count)]);
+        Console.WriteLine(prompt);
         
         string response = Console.ReadLine();
 
         DateTime stamp = DateTime.Now;
         
-        Entery new_entery = new Entery(new Date(stamp.Day, stamp.Month, stamp.Year), response);
+        Entery newEntery = new Entery(new Date(stamp.Day, stamp.Month, stamp.Year), prompt, response);
 
-        journal.Add(new_entery);
+        journal.Add(newEntery);
 
     }
 
     static void SaveJournal() {
-        ReaderWriter.WriteJournal(journal);
+
+        Console.WriteLine("File Name: ");
+
+        string fileName = Console.ReadLine(); 
+
+        ReaderWriter.WriteJournal(journal, fileName);
     }
 }

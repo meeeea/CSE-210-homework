@@ -1,8 +1,8 @@
 class ReaderWriter {
 
-    public static Journal ReadJournal() {
+    public static Journal ReadJournal(string FileName) {
         Journal returnable = new Journal();
-        using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\journal.txt"))  {  
+        using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\{FileName}"))  {  
                 while (true) {
                     string nextLine = reader.ReadLine();
                     if (nextLine == null) {
@@ -10,7 +10,7 @@ class ReaderWriter {
                     }
                     string[] line = nextLine.Split('|');
                     returnable.Add(new Entery(new Date(Int32.Parse(line[0]), Int32.Parse(line[1]),
-                        Int32.Parse(line[2])), line[3]));
+                        Int32.Parse(line[2])), line[3], line[4]));
                 }
             } 
         return returnable;
@@ -30,8 +30,8 @@ class ReaderWriter {
         return returnable;
     }
 
-    public static void WriteJournal(Journal journal) {
-        using (StreamWriter writer = File.CreateText(".\\prove\\Develop02\\text_files\\journal.txt"))
+    public static void WriteJournal(Journal journal, string FileName) {
+        using (StreamWriter writer = File.CreateText($".\\prove\\Develop02\\text_files\\{FileName}"))
             {
                 foreach (string line in journal.Read()) {
                     writer.WriteLine(line);
