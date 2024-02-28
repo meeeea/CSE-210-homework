@@ -49,10 +49,10 @@ class Program
     }
 
     static void quit() {
-        Console.WriteLine("Would you like to ensure your journal was saved?");
+        Console.WriteLine("Type 'yes' To Confirm.");
         string response = Console.ReadLine();
         
-        if (response == "yes") {
+        if (response != "yes") {
             return;
         }
         System.Environment.Exit(0);

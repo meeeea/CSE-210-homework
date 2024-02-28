@@ -11,8 +11,9 @@ class Entery {
         this._text = text;
     }
 
-    public string Display(bool american = true) {
-        return $"{this._date.Display(american)}: {this._prompt} {this._text}";
+    public string[] Display(bool american = true) {
+        return new string[3] {$"{this._date.Display(american)}", $": {this._prompt}",
+                                 $"\t{this._text}"};
     }
 
     public string Read() {
