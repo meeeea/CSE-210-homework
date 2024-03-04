@@ -3,14 +3,16 @@ class ReaderWriter {
     public static Journal ReadJournal(string FileName) {
         Journal returnable = new Journal();
         using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\{FileName}"))  {  
+                string display_order = reader.ReadLine();
+                
                 while (true) {
                     string nextLine = reader.ReadLine();
                     if (nextLine == null) {
                         break;
                     }
                     string[] line = nextLine.Split('|');
-                    returnable.Add(new Entery(new Date(Int32.Parse(line[0]), Int32.Parse(line[1]),
-                        Int32.Parse(line[2])), line[3], line[4]));
+                    returnable.Add(new Entery(new Date(display_order, Int32.Parse(line[0]),
+                        Int32.Parse(line[1]), Int32.Parse(line[2])), line[3], line[4]));
                 }
             } 
         return returnable;
@@ -33,6 +35,7 @@ class ReaderWriter {
     public static void WriteJournal(Journal journal, string FileName) {
         using (StreamWriter writer = File.CreateText($".\\prove\\Develop02\\text_files\\{FileName}"))
             {
+                writer.WriteLine(journal.GetDateDisplayOrder());
                 foreach (string line in journal.Read()) {
                     writer.WriteLine(line);
                 }

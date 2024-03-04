@@ -5,6 +5,9 @@ using System;
 class Program
 {
     public static Journal journal = new Journal();
+
+    public static string displayOrderDefault;
+    
     static void Main(string[] args)
     {
         OpenJournal();
@@ -34,10 +37,58 @@ class Program
             else if (response == "add") {
                 AddEntery();
             }
+            else if (response == "load") {
+                OpenJournal(); 
+            }
+            else if (response == "settings") {
+                settings();
+            }
             else {
                 Console.WriteLine("Sorry, that isn't a valid command. Please try 'help'\n");
             }
         }
+    }
+
+    static void settings() {
+        while (true) {
+            Console.WriteLine("Command: ");
+
+            string response = Console.ReadLine().ToLower();
+
+            if (response == "date") {
+                SetDateDisplayOrder();
+                // TODO this
+            }
+            else if (response == "return") {
+                return;
+            }
+            else {
+                Console.WriteLine("Sorry, that isn't a valid command. Please try 'help'\n");
+            }
+        }
+    }
+
+    static void SetDateDisplayOrder() {
+        while (true) {
+            Console.WriteLine("Display Order (ie: dmy, mdy, ydm): ");
+        
+            string order = Console.ReadLine();
+            
+            List<string> valid_orders = new List<string>() {"dmy", "mdy", "ydm", 
+                                                            "ymd", "dym", "myd"};
+            if (valid_orders.Contains(order)) {
+                journal.SetDateDisplayOrder(order);
+                return;
+            }
+        }
+    }
+
+    static void DisplaySettingsHelpMenu() {
+        Console.WriteLine("Commands:");
+        Console.WriteLine("'date' : set the date display order (ie: d-m-y).");
+        Console.WriteLine("'return' : return to previous menue.");
+
+        Console.WriteLine();
     }
 
     static void DislpayHelpMenu() {
@@ -46,8 +97,11 @@ class Program
         Console.WriteLine("'quit' : Exit the program.");
         Console.WriteLine("'journal' : Display journal.");
         Console.WriteLine("'save' : Saves journal");
-        Console.WriteLine("'add' : Adds an entery to your journal.\n");
+        Console.WriteLine("'add' : Adds an entery to your journal.");
         Console.WriteLine("'load' : Loads a journal from selected location.");
+        Console.WriteLine("'settings' : modify settings");
+
+        Console.WriteLine();
     }
 
     static void quit() {
@@ -66,6 +120,8 @@ class Program
         string fileName = Console.ReadLine(); 
 
         journal = ReaderWriter.ReadJournal(fileName);
+
+        displayOrderDefault = journal.GetDateDisplayOrder();
     }
 
     static void DisplayJournal() {
@@ -84,7 +140,8 @@ class Program
 
         DateTime stamp = DateTime.Now;
         
-        Entery newEntery = new Entery(new Date(stamp.Day, stamp.Month, stamp.Year), prompt, response);
+        Entery newEntery = new Entery(new Date(displayOrderDefault, stamp.Day, stamp.Month,
+                                                stamp.Year), prompt, response);
 
         journal.Add(newEntery);
 

@@ -1,3 +1,5 @@
+mdy
 3|1|2024|when did you eat breakfast?|I ate breakfast early this morning.
 1|3|2024|what are you most excited for|Church Prom. WOOP WOOP.
 28|2|2024|How did I see the hand of the Lord in my life today?|I went to Seminary.
+4|3|2024|What was the strongest emotion I felt today?|hunger
