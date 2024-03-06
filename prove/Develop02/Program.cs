@@ -2,6 +2,9 @@ using System;
 
 // for go above and beyond, I did fun colors when printing your journal.
 
+// it also stores the format on how to print the date (wether you want it saved as month-day-year)
+// or any other order
+
 class Program
 {
     public static Journal journal = new Journal();
