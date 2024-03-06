@@ -51,13 +51,16 @@ class Program
 
     static void settings() {
         while (true) {
-            Console.WriteLine("Command: ");
+            Console.WriteLine("Settings Command: ");
 
             string response = Console.ReadLine().ToLower();
 
             if (response == "date") {
                 SetDateDisplayOrder();
                 // TODO this
+            }
+            else if (response == "help") {
+                DisplaySettingsHelpMenu();
             }
             else if (response == "return") {
                 return;
@@ -144,7 +147,6 @@ class Program
                                                 stamp.Year), prompt, response);
 
         journal.Add(newEntery);
-
     }
 
     static void SaveJournal() {
