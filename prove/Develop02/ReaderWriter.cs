@@ -1,10 +1,10 @@
 class ReaderWriter {
 
     public static Journal ReadJournal(string FileName) {
-        Journal returnable = new Journal();
-        using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\{FileName}"))  {  
+        try {
+            Journal returnable = new Journal();
+            using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\{FileName}"))  {  
                 string display_order = reader.ReadLine();
-                
                 while (true) {
                     string nextLine = reader.ReadLine();
                     if (nextLine == null) {
@@ -15,21 +15,33 @@ class ReaderWriter {
                         Int32.Parse(line[1]), Int32.Parse(line[2])), line[3], line[4]));
                 }
             } 
-        return returnable;
+            return returnable;
+        }
+        catch (FileNotFoundException e){
+            Console.WriteLine("sorry, that isn't a file");
+            System.Environment.Exit(2);
+        }
     }
 
     public static List<string> ReadPrompts() {
-        List<string> returnable = new List<string>();
-        using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\prompts.txt"))  {  
-                while (true) {
-                    string line = reader.ReadLine();
-                    if (line == null) {
-                        break;
+        try {
+            List<string> returnable = new List<string>();
+            using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\prompts.txt"))  {  
+                    while (true) {
+                        string line = reader.ReadLine();
+                        if (line == null) {
+                            break;
+                        }
+                        returnable.Add(line);
                     }
-                    returnable.Add(line);
-                }
-            } 
-        return returnable;
+                } 
+            return returnable;
+        }
+        catch (FileNotFoundException e) {
+            Console.WriteLine("sorry, couldn't find file 'prompts.txt' in folder text_files");
+            System.Environment.Exit(3);
+        }
+        
     }
 
     public static void WriteJournal(Journal journal, string FileName) {

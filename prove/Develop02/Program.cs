@@ -34,7 +34,7 @@ class Program
             else if (response == "save") {
                 SaveJournal();
             }
-            else if (response == "journal") {
+            else if (response == "display") {
                 DisplayJournal();
             }
             else if (response == "add") {
@@ -60,7 +60,6 @@ class Program
 
             if (response == "date") {
                 SetDateDisplayOrder();
-                // TODO this
             }
             else if (response == "help") {
                 DisplaySettingsHelpMenu();
@@ -101,7 +100,7 @@ class Program
         Console.WriteLine("Commands:");
         Console.WriteLine("'help' : Show this list.");
         Console.WriteLine("'quit' : Exit the program.");
-        Console.WriteLine("'journal' : Display journal.");
+        Console.WriteLine("'display' : Display journal.");
         Console.WriteLine("'save' : Saves journal");
         Console.WriteLine("'add' : Adds an entery to your journal.");
         Console.WriteLine("'load' : Loads a journal from selected location.");

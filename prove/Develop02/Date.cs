@@ -21,6 +21,12 @@ class Date {
         else if (this._displayOrder == "ydm") {
             return $"{this._year}-{this._day}-{this._month}";
         }
+        else if (this._displayOrder == "myd") {
+            return $"{this._month}-{this._year}-{this._day}";
+        }
+        else if (this._displayOrder == "dym") {
+            return $"{this._day}-{this._year}-{this._month}";
+        }
         else {            
             return $"{this._year}-{this._month}-{this._day}";
         }
