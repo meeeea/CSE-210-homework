@@ -17,5 +17,4 @@ class Resume {
         }
         Console.WriteLine("+" + "+".PadLeft(71, '-'));
     }
-    
 }
