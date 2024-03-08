@@ -1,8 +1,3 @@
-// just an fyi, I didn't read the group work assignment before doing this,
-// I did this assignment the end of week 1. In none of my other courses has
-// the group work been required to finish the weeks homework. Additionaly, every
-// byui programing course seems to thoroughly railroad how you implament the task.
-
 // for go above and beyond, I did fun colors when printing your journal.
 
 // it also stores the format on how to print the date (ie. month-day-year
