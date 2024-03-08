@@ -9,8 +9,7 @@ class Program
 
     public static string displayOrderDefault;
     
-    static void Main(string[] args)
-    {
+    static void Main(string[] args) {
         OpenJournal();
         DisplayJournal();
 
