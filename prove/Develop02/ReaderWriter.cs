@@ -17,10 +17,11 @@ class ReaderWriter {
             } 
             return returnable;
         }
-        catch (FileNotFoundException e){
+        catch (FileNotFoundException){
             Console.WriteLine("sorry, that isn't a file");
             System.Environment.Exit(2);
         }
+        return null;
     }
 
     public static List<string> ReadPrompts() {
@@ -37,11 +38,11 @@ class ReaderWriter {
                 } 
             return returnable;
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException) {
             Console.WriteLine("sorry, couldn't find file 'prompts.txt' in folder text_files");
             System.Environment.Exit(3);
         }
-        
+        return null;        
     }
 
     public static void WriteJournal(Journal journal, string FileName) {
