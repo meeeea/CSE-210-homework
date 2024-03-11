@@ -18,10 +18,8 @@ class ReaderWriter {
             return returnable;
         }
         catch (FileNotFoundException){
-            Console.WriteLine("sorry, that isn't a file");
-            System.Environment.Exit(2);
+            return new Journal();
         }
-        return null;
     }
 
     public static List<string> ReadPrompts() {
