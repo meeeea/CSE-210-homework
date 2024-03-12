@@ -1,5 +1,8 @@
 class Word {
     private string _word;
+    private bool _isHiden = false;
+
+    //not a member variable, it's a property
     public string word{
         get {
             if (isHiden) {
@@ -8,8 +11,7 @@ class Word {
             return _word;}
         set {_word = value;}
     }
-
-    private bool _isHiden = false;
+    //not a member variable, it's a property
     public bool isHiden {
         get {return _isHiden;}
     }

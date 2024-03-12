@@ -1,11 +1,14 @@
 class Scripture {
     private Refference _refference = new Refference("");
     private List<Word> _scripture = new List<Word>();
+
+    //not a member variable, it's a property
     public string refference {
         get {return _refference.Display();}
         set {_refference = new Refference(value);}
     }
 
+    //not a member variable, it's a property
     public string scripture {
         get {string returnable = "";
             foreach (Word word in _scripture) {
