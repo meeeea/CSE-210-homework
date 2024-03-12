@@ -1,28 +1,28 @@
 class Scripture {
-    private string _refference = "";
-    private List<string> _scripture;
-    private List<int> _convertedIndexes = new List<int>();
-
+    private Refference _refference = new Refference("");
+    private List<Word> _scripture = new List<Word>();
     public string refference {
-        get {return _refference;}
-        set {_refference = value;}
+        get {return _refference.Display();}
+        set {_refference = new Refference(value);}
     }
 
     public string scripture {
         get {string returnable = "";
-            foreach (string word in _scripture) {
-                returnable += word + " ";
+            foreach (Word word in _scripture) {
+                returnable += word.word + " ";
             }
-            return returnable;}
-        set {_scripture = new List<string>(value.Split());}
+            return returnable;
+        }
+        set {foreach (string word in value.Split()) {
+                _scripture.Add(new Word(word));
+            }
+        }
     }
 
     public Scripture(string theRefference, string theScripture) {
         refference = theRefference;
         scripture = theScripture;
     }
-
-
 
     public void EraseWords(int quantity) {
         if (quantity > GetScriptureLength()) {
@@ -31,12 +31,9 @@ class Scripture {
         Random random = new Random();
         for (int i = 0; i < quantity; i++) {
             int index = random.Next(_scripture.Count);
-            if (_convertedIndexes.Contains(index)) {
+            if (_scripture[index].Hide()) {
                 i--;
                 continue;
-            }
-            else {
-                EraseWord(index);
             }
         }
     }
@@ -46,19 +43,22 @@ class Scripture {
     }
 
     public bool IsAllBlank() {
-        if (GetScriptureLength() == 0) {
-            return true;
+        foreach (Word word in _scripture) {
+            if (word.isHiden == false) {
+                return false;
+            }
         }
-        return false;
-    }
-    
-    private void EraseWord(int index) {
-        int wordLength = _scripture[index].Length;
-        _scripture[index] = "".PadRight(wordLength, '_');
-        _convertedIndexes.Add(index);
+        return true;
     }
 
+
     private int GetScriptureLength() {
-        return _scripture.Count - _convertedIndexes.Count;
+        int i = 0;
+        foreach (Word word in _scripture) {
+            if (word.isHiden == false) {
+                i++;
+            }
+        }
+        return i;
     }
 }
