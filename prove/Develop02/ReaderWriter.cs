@@ -26,14 +26,14 @@ class ReaderWriter {
         try {
             List<string> returnable = new List<string>();
             using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\prompts.txt"))  {  
-                    while (true) {
-                        string line = reader.ReadLine();
-                        if (line == null) {
-                            break;
-                        }
-                        returnable.Add(line);
+                while (true) {
+                    string line = reader.ReadLine();
+                    if (line == null) {
+                        break;
                     }
-                } 
+                    returnable.Add(line);
+                }
+            } 
             return returnable;
         }
         catch (FileNotFoundException) {
@@ -44,12 +44,11 @@ class ReaderWriter {
     }
 
     public static void WriteJournal(Journal journal, string FileName) {
-        using (StreamWriter writer = File.CreateText($".\\prove\\Develop02\\text_files\\{FileName}"))
-            {
-                writer.WriteLine(journal.GetDateDisplayOrder());
-                foreach (string line in journal.Read()) {
-                    writer.WriteLine(line);
-                }
+        using (StreamWriter writer = File.CreateText($".\\prove\\Develop02\\text_files\\{FileName}")){
+            writer.WriteLine(journal.GetDateDisplayOrder());
+            foreach (string line in journal.Read()) {
+                writer.WriteLine(line);
             }
+        }
     }
 }
