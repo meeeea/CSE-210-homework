@@ -3,7 +3,7 @@ class ReaderWriter {
     public static Journal ReadJournal(string FileName) {
         try {
             Journal returnable = new Journal();
-            using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\{FileName}"))  {  
+            using (TextReader reader = File.OpenText($"text_files\\{FileName}"))  {  
                 string display_order = reader.ReadLine();
                 while (true) {
                     string nextLine = reader.ReadLine();
@@ -25,7 +25,7 @@ class ReaderWriter {
     public static List<string> ReadPrompts() {
         try {
             List<string> returnable = new List<string>();
-            using (TextReader reader = File.OpenText($".\\prove\\Develop02\\text_files\\prompts.txt"))  {  
+            using (TextReader reader = File.OpenText($"text_files\\prompts.txt"))  {  
                 while (true) {
                     string line = reader.ReadLine();
                     if (line == null) {
@@ -44,7 +44,7 @@ class ReaderWriter {
     }
 
     public static void WriteJournal(Journal journal, string FileName) {
-        using (StreamWriter writer = File.CreateText($".\\prove\\Develop02\\text_files\\{FileName}")){
+        using (StreamWriter writer = File.CreateText($"text_files\\{FileName}")){
             writer.WriteLine(journal.GetDateDisplayOrder());
             foreach (string line in journal.Read()) {
                 writer.WriteLine(line);
