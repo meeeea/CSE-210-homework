@@ -37,6 +37,7 @@ class Activity {
     protected static void EndDisplay() {
         Console.WriteLine("Good Job!");
         Wait(5, false);
+        Console.Clear();
     }
 
     protected static void Wait(int seconds, bool isNum = true) {
