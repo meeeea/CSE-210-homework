@@ -3,9 +3,9 @@ class Checklist : Goal {
 
     private Steps _steps = new Steps();
 
-    public Checklist(int score, string name, Steps steps, int completionMult = 5) : base(score, name) {
+    public Checklist(int score, string name, string[] steps, int completionMult = 5) : base(score, name) {
         _completionMult = completionMult;
-        _steps = steps;
+        _steps = new Steps(steps);
     }
 
     public override int Score { get {
