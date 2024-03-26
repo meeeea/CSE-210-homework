@@ -14,7 +14,8 @@ class Event : Goal {
         return $"{CompletedBox()} {_name} ({_score})";
     }
     
-    protected override void Complete() {
+    protected override int Complete() {
         _isComplete = true;
+        return _score;
     }
 }

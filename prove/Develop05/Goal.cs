@@ -15,7 +15,7 @@ abstract class Goal {
 
     public abstract string Display();
 
-    protected abstract void Complete();
+    protected abstract int Complete();
 
     protected string CompletedBox() {
         if (IsComplete) {
@@ -25,7 +25,6 @@ abstract class Goal {
     }
 
     public int CompleteScore() {
-        Complete();
-        return Score;
+        return Complete();
     }
 }

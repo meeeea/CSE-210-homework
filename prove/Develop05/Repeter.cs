@@ -4,8 +4,8 @@ class Repeter : Goal {
     public override int Score => _score;
 
     public override string Display(){
-        return $"{CompletedBox()} {_name} ({Score})";
+        return $"[O] {_name} ({Score})";
     }
 
-    protected override void Complete() {}
+    protected override int Complete() => Score;
 }

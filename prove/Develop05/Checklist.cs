@@ -9,8 +9,19 @@ class Checklist : Goal {
     }
 
     public override int Score { get {
-            int index = _steps.GetNextUncompletedIndex();
-            if (index == _steps.Count - 1) {
+            int index = _steps.GetCompletedCount();
+            if (index == _steps.Count) {
+                _isComplete = true;
+                return _score * _completionMult;
+            }
+            else {
+                return _score;
+            };
+        }
+    }
+    public int NextScore { get {
+            int index = _steps.GetCompletedCount() + 1;
+            if (index >= _steps.Count) {
                 return _score * _completionMult;
             }
             else {
@@ -23,11 +34,11 @@ class Checklist : Goal {
         int index = _steps.GetNextUncompletedIndex();
         int k = _steps.GetCompletedCount();
 
-        return $"{CompletedBox()} {_name} - ({_steps[index].Key}) ({Score}) -- Completed ({k}/{_steps.Count})";
+        return $"{CompletedBox()} {_name} - ({_steps[index].Key}) ({NextScore}) -- Completed ({k}/{_steps.Count})";
     }
 
-    protected override void Complete(){
+    protected override int Complete(){
         _steps.Complete(_steps.GetNextUncompletedIndex());
-
+        return Score;
     }
 }
