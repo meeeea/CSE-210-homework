@@ -38,4 +38,16 @@ class Steps {
         }
         return i;
     }
+
+    public void Add(string name, bool isComplete) {
+        _steps.Add(new KeyValuePair<string, bool>(name, isComplete));
+    }
+
+    public void Save(StreamWriter writer) {
+        foreach (KeyValuePair<string, bool> keyValuePair in _steps) {
+            Console.WriteLine("help");
+            int intBool = keyValuePair.Value == true ? 1 : 0;
+            writer.Write($"{keyValuePair.Key}|{intBool}|");
+        }
+    }
 }

@@ -1,3 +1,5 @@
+using System.Runtime.Intrinsics.Arm;
+
 abstract class Goal {
     protected int _score;
     protected string _name;
@@ -17,6 +19,7 @@ abstract class Goal {
 
     protected abstract int Complete();
 
+    public abstract void Save(StreamWriter writer);
     protected string CompletedBox() {
         if (IsComplete) {
             return "[X]";

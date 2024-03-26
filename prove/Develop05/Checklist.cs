@@ -1,3 +1,4 @@
+
 class Checklist : Goal {
     private int _completionMult;
 
@@ -6,6 +7,11 @@ class Checklist : Goal {
     public Checklist(int score, string name, string[] steps, int completionMult = 5) : base(score, name) {
         _completionMult = completionMult;
         _steps = new Steps(steps);
+    }
+
+    public Checklist(int score, string name, Steps steps, int completionMult = 5) : base(score, name) {
+        _completionMult = completionMult;
+        _steps = steps;
     }
 
     public override int Score { get {
@@ -40,5 +46,11 @@ class Checklist : Goal {
     protected override int Complete(){
         _steps.Complete(_steps.GetNextUncompletedIndex());
         return Score;
+    }
+
+    public override void Save(StreamWriter writer) {
+        writer.Write($"\nChecklist|{_name}|");
+        _steps.Save(writer);
+        writer.Write($"{_score}|{_completionMult}");
     }
 }

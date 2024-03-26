@@ -8,4 +8,11 @@ class Repeter : Goal {
     }
 
     protected override int Complete() => Score;
+
+    public override void Save(StreamWriter writer) {
+        // declare save type
+        writer.Write("\nRepeter|");
+        // display unique info
+        writer.Write($"{_name}|{Score}");
+    }
 }

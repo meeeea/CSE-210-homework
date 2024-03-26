@@ -26,7 +26,7 @@ class GoalManager {
     private void MenuDisplay() {
         Console.WriteLine("\n1. Create New Goals");
         Console.WriteLine("2. List Goals");
-        Console.WriteLine("3. save Goals (TODO)");
+        Console.WriteLine("3. save Goals");
         Console.WriteLine("4. Load Goals (TODO)");
         Console.WriteLine("5. Record Event");
         Console.WriteLine("6. Quit");
@@ -43,7 +43,12 @@ class GoalManager {
             case 2:
                 Display();
                 return;
-
+            case 3:
+                SaveGoalSet();
+                return;
+            case 4:
+                LoadGoalSet();
+                return;
             case 5:
                 RecordEvent();
                 return;
@@ -121,7 +126,66 @@ class GoalManager {
         }
     }
 
-    public Goal this[int x]{
+    private void SaveGoalSet() {
+        Console.WriteLine("input name of file");
+        string FileName = Console.ReadLine();
+        using (StreamWriter writer = File.CreateText($"text_files\\{FileName}.gs")){
+            writer.Write(_totalScore);
+            foreach (Goal goal in _goals) {
+                goal.Save(writer);
+            }
+        }
+    }
+
+    private void LoadGoalSet() {
+        try {
+            Console.WriteLine("input name of file");
+            string FileName = Console.ReadLine();
+            
+            _goals = new List<Goal>();
+            
+            using (StreamReader reader = File.OpenText($"text_files\\{FileName}.gs")) {
+                _totalScore = int.Parse(reader.ReadLine());
+                while (true) {
+                    string line = reader.ReadLine();
+                    if (line == null) {
+                        break;
+                    }
+                    string[] lineParts = line.Split('|');
+                    if (lineParts[0] == "Event") {
+                        Add(new Event(int.Parse(lineParts[3]), lineParts[2], int.Parse(lineParts[2]) == 1));
+                    }
+                    else if (lineParts[0] == "Repeter") {
+                        Add(new Repeter(int.Parse(lineParts[2]), lineParts[1]));
+                    }
+                    else {
+                        string checklistName = lineParts[1];
+
+                        Steps steps = new Steps();
+
+                        int index = 2;
+                        int value;
+                        while (true) {
+                            if (int.TryParse(lineParts[index], out value)) {
+                                break;
+                            }   
+                            else {
+                                steps.Add(lineParts[index], lineParts[index + 1] == "1");
+                            }
+                            index += 2;
+                        }
+                        Add(new Checklist(value, lineParts[1], steps, int.Parse(lineParts[^1])));
+                    }
+                }
+            }
+        }
+        catch (FileNotFoundException) {
+            Console.WriteLine("I'm sorry, I could not find that file, have you checked that your root folder is Develop05?");
+            Environment.Exit(2);
+        }
+    }
+
+    public Goal this[int x] {
         get => _goals[x];
     }
 }

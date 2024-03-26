@@ -1,5 +1,8 @@
+
 class Event : Goal {    
-    public Event(int score, string name) : base(score, name) {}
+    public Event(int score, string name, bool completed = false) : base(score, name) {
+        _isComplete = completed;
+    }
 
     public override int Score {get {
         if (!IsComplete) {
@@ -17,5 +20,19 @@ class Event : Goal {
     protected override int Complete() {
         _isComplete = true;
         return _score;
+    }
+
+    public override void Save(StreamWriter writer) {
+        writer.Write("\nEvent|");
+
+        writer.Write(_name);
+
+        if (IsComplete) {
+            writer.Write("|1|");
+        }
+        else {
+            writer.Write("|0|");
+        }
+        writer.Write(_score);
     }
 }
