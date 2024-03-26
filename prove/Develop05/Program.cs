@@ -8,13 +8,8 @@ class Program
         goalManager.Add(new Event(100, "go shoping"));
         goalManager.Add(new Repeter(100, "eat out"));
         string[] takeDogForWalkStrings = new string[3]{"find Leash", "find dog", "go on the walk"};
-        goalManager.Add(new Checklist(100, "take dog for walk", new Steps(takeDogForWalkStrings)));
+        goalManager.Add(new Checklist(100, "take dog for walk", takeDogForWalkStrings));
         goalManager.Add(new Event(100, "go eat sandwich"));
-        goalManager.Display();
-
-        goalManager[1].CompleteScore();
-        Console.WriteLine("");
-        goalManager.Display();
-
+        goalManager.MainLoop();
     }
 }
