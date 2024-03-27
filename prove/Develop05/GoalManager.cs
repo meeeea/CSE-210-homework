@@ -1,17 +1,14 @@
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
-
 class GoalManager {
     private List<Goal> _goals = new List<Goal>();
 
-    private int _totalScore = 0;
+    private LevelManager _levelManager = new LevelManager(0, 1);
 
     public void Add(Goal goal) {
         _goals.Add(goal);
     }
 
     private void Display() {
-        Console.WriteLine($"\nTotoal Score: {_totalScore}");
+        _levelManager.Display();
         for (int i = 0; i < _goals.Count; i ++) {
             Console.WriteLine($"{i + 1}: " + _goals[i].Display());
         }
@@ -27,7 +24,7 @@ class GoalManager {
         Console.WriteLine("\n1. Create New Goals");
         Console.WriteLine("2. List Goals");
         Console.WriteLine("3. save Goals");
-        Console.WriteLine("4. Load Goals (TODO)");
+        Console.WriteLine("4. Load Goals");
         Console.WriteLine("5. Record Event");
         Console.WriteLine("6. Quit");
         Console.Write("Select: ");
@@ -36,6 +33,10 @@ class GoalManager {
 
         Console.Clear();
 
+        MenuResponseManager(response);
+    }
+
+    private void MenuResponseManager(int response) {
         switch (response) {
             case 1:
                 NewGoal();
@@ -122,7 +123,7 @@ class GoalManager {
         Console.WriteLine("Select Goal to complete");
         int response = int.Parse(Console.ReadLine()) - 1;
         if (!this[response].IsComplete) {
-            _totalScore += this[response].CompleteScore();
+            _levelManager.CalcScore(this[response].CompleteScore());
         }
     }
 
@@ -130,7 +131,7 @@ class GoalManager {
         Console.WriteLine("input name of file");
         string FileName = Console.ReadLine();
         using (StreamWriter writer = File.CreateText($"text_files\\{FileName}.gs")){
-            writer.Write(_totalScore);
+            _levelManager.Write(writer);
             foreach (Goal goal in _goals) {
                 goal.Save(writer);
             }
@@ -145,7 +146,8 @@ class GoalManager {
             _goals = new List<Goal>();
             
             using (StreamReader reader = File.OpenText($"text_files\\{FileName}.gs")) {
-                _totalScore = int.Parse(reader.ReadLine());
+                string[] data = reader.ReadLine().Split('|');
+                _levelManager = new LevelManager(int.Parse(data[0]), int.Parse(data[1]));
                 while (true) {
                     string line = reader.ReadLine();
                     if (line == null) {
@@ -153,7 +155,7 @@ class GoalManager {
                     }
                     string[] lineParts = line.Split('|');
                     if (lineParts[0] == "Event") {
-                        Add(new Event(int.Parse(lineParts[3]), lineParts[2], int.Parse(lineParts[2]) == 1));
+                        Add(new Event(int.Parse(lineParts[3]), lineParts[1], int.Parse(lineParts[2]) == 1));
                     }
                     else if (lineParts[0] == "Repeter") {
                         Add(new Repeter(int.Parse(lineParts[2]), lineParts[1]));
