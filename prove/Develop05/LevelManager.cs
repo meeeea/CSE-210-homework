@@ -19,8 +19,13 @@ class LevelManager {
         if (_totalScore >= ScoreToLevel) {
             _totalScore -= Convert.ToInt32(ScoreToLevel);
             _level ++;
+            LevelUpMessage();
             LevelCheck();
         }
+    }
+
+    private void LevelUpMessage() {
+        Console.WriteLine($" level {_level - 1} -> {_level}!!!");
     }
 
     public void Write(StreamWriter writer) {
