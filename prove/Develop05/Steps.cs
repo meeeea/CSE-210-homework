@@ -45,7 +45,6 @@ class Steps {
 
     public void Save(StreamWriter writer) {
         foreach (KeyValuePair<string, bool> keyValuePair in _steps) {
-            Console.WriteLine("help");
             int intBool = keyValuePair.Value == true ? 1 : 0;
             writer.Write($"{keyValuePair.Key}|{intBool}|");
         }
