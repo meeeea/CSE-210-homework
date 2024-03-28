@@ -5,7 +5,7 @@ class LevelManager {
 
     public int ScoreToLevel => Convert.ToInt32((_level/.67F * (_level/.67F)) + 100);
 
-    public LevelManager(int score, int level) {
+    public LevelManager(int score =0, int level = 1) {
         _totalScore = score;
         _level = level;
     }

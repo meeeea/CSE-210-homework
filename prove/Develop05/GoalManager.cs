@@ -1,7 +1,7 @@
 class GoalManager {
     private List<Goal> _goals = new List<Goal>();
 
-    private LevelManager _levelManager = new LevelManager(0, 1);
+    private LevelManager _levelManager = new LevelManager();
 
     public void Add(Goal goal) {
         _goals.Add(goal);
