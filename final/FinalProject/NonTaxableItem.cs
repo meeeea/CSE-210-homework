@@ -1,9 +1,14 @@
 class NonTaxableItem : Item {
-    public NonTaxableItem(string name, float wholeSalePrice, float demand, float inventory = 0, 
-                        float retailPrice = 0) : base(name, wholeSalePrice, demand, 
+    public NonTaxableItem(string name, float wsp, float wsm, float d, float dm,
+                int inventory, float retailPrice) : base(name, wsp, wsm, d, dm,
                                                     inventory, retailPrice) {}
 
     public override int CalculateSales()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override string Display()
     {
         throw new NotImplementedException();
     }

@@ -6,5 +6,5 @@ abstract class VaryInfo {
         _baseValue = baseValue;
         _priceChangeModifier = modifier;
     }
-    public abstract void CalculateNewPrice();
+    public abstract void CalculateMod();
 }
