@@ -1,0 +1,6 @@
+Grocerie Manager. (open ended)
+
+The program will be a Grocerie Store Manager game. It will be designed to allow the user 
+to purchase stock and set prices, while the price customers are willing to pay and the price 
+stock costs will slowly fluctuate between selling periods. It will save your money, 
+stock, and other information.
