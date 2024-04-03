@@ -6,6 +6,6 @@ class SuplyVaryInfo : VaryInfo {
     }
 
     public override string Display() {
-        return $"{_baseValue.ToString("F2")}";
+        return $"{_baseValue:F2}";
     }
 }

@@ -10,7 +10,7 @@ class TaxableItem : Item {
 
     public override string Display()
     {
-        return $"{_name}: {_inventory} in stock, whole sale price: {_wholeSalePrice.Display()}, " +
-             $"retail price: {_retailPrice.ToString("F2")}";
+        return $"{_name}:".PadLeft(15) + $" {_inventory} in stock, whole sale price: "+ 
+            $"{_wholeSalePrice.Display()}, retail price: {_retailPrice:F2} + Tax.";
     }
 }

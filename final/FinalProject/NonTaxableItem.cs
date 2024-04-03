@@ -10,6 +10,7 @@ class NonTaxableItem : Item {
 
     public override string Display()
     {
-        throw new NotImplementedException();
+        return  $"{_name}:".PadLeft(15) + $" {_inventory} in stock, whole sale price: "+ 
+            $"{_wholeSalePrice.Display()}, retail price: {_retailPrice:F2}.";
     }
 }

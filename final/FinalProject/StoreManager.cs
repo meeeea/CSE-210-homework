@@ -56,7 +56,16 @@ class StoreManager {
     }
 
     private void SetRetailPrice() {
-        throw new NotImplementedException();
+        Item item = _items.SelectItemInInventory();
+        if (item == null) {
+            Console.WriteLine("Sorry, you don't have any inventory," +
+            " please purchase some inventory before setting thier retail price");
+            return;
+        }
+        
+        Console.WriteLine(item.Display());
+        Console.WriteLine("Set Retail Price (excluding tax).");
+        item.SetRetailPrice(float.Parse(Console.ReadLine()));
     }
 
     private void EndCycle() {

@@ -3,6 +3,7 @@ abstract class Item {
     protected string Name => _name;
     protected DemandVaryInfo _demand;
     protected int  _inventory;
+    public bool InStock => _inventory > 0;
     protected SuplyVaryInfo _wholeSalePrice;
     protected float _retailPrice;
 
@@ -21,5 +22,9 @@ abstract class Item {
 
     public void Purchase() {
         _inventory++;
+    }
+
+    public void SetRetailPrice(float price) {
+        _retailPrice = price;
     }
 }
