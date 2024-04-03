@@ -80,8 +80,4 @@ class StoreManager {
         StoreManager newSave = SaverLoader.Load();
         _items = newSave._items;
     }
-
-    private int GetItemIndex() {
-        return _items.SelectItem();
-    }
 }
