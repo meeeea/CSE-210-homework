@@ -1,7 +1,8 @@
 using System.Text.RegularExpressions;
 
 class StoreManager {
-    ItemManager _items = new ItemManager();
+    private ItemManager _items = new ItemManager();
+    public ItemManager Items => _items;
 
     public StoreManager() {}
     public StoreManager(ItemManager itemManager) {
@@ -16,11 +17,11 @@ class StoreManager {
 
     private void Menu() {
         Console.WriteLine("1. View Inventory");
-        Console.WriteLine("2. Purchase Inventory (TODO)");
-        Console.WriteLine("3. Set Item Price (TODO)");
+        Console.WriteLine("2. Purchase Inventory");
+        Console.WriteLine("3. Set Item Price");
         Console.WriteLine("4. End Cycle (TODO)");
-        Console.WriteLine("5. Save Game (TODO)");
-        Console.WriteLine("6. Load Game (TODO)");
+        Console.WriteLine("5. Save Game");
+        Console.WriteLine("6. Load Game");
         Console.WriteLine("7. Quit");
 
         ExicuteMenu(int.Parse(Console.ReadLine()));

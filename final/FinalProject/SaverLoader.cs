@@ -2,7 +2,11 @@ using System.Runtime.CompilerServices;
 
 class SaverLoader {
     public static void Save(StoreManager storeManager) {
-        throw new NotImplementedException();
+        Console.WriteLine("Input Save Name");
+        string FileLocation = Console.ReadLine();
+        using (StreamWriter writer = File.CreateText($"saves\\{FileLocation}")) {
+            storeManager.Items.Save(writer);
+        }
     }
 
     public static StoreManager Load() {

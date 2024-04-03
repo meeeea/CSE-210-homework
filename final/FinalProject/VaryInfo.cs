@@ -9,4 +9,8 @@ abstract class VaryInfo {
     public abstract void CalculateMod();
 
     public abstract string Display();
+
+    public string Save() {
+        return $"{_baseValue}|{_priceChangeModifier}";
+    }
 }

@@ -20,6 +20,8 @@ abstract class Item {
 
     public abstract string Display();
 
+    public abstract string Save();
+
     public void Purchase() {
         _inventory++;
     }

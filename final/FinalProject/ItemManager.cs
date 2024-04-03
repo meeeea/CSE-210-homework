@@ -56,4 +56,10 @@ class ItemManager {
             Console.WriteLine(item.Display());
         }
     }
+
+    public void Save(StreamWriter writer) {
+        foreach (Item item in items) {
+            writer.WriteLine(item.Save());
+        }
+    }
 }
