@@ -3,6 +3,11 @@ using System.Text.RegularExpressions;
 class StoreManager {
     ItemManager _items = new ItemManager();
 
+    public StoreManager() {}
+    public StoreManager(ItemManager itemManager) {
+        _items = itemManager;
+    }
+
     public void MainGameLoop() {
         while (true) {
             Menu();
@@ -10,36 +15,44 @@ class StoreManager {
     }
 
     private void Menu() {
-        Console.WriteLine("1. Purchase Inventory (TODO)");
-        Console.WriteLine("2. Set Item Price (TODO)");
-        Console.WriteLine("3. End Cycle (TODO)");
-        Console.WriteLine("4. Save Game (TODO)");
-        Console.WriteLine("5. Load Game (TODO)");
-        Console.WriteLine("6. Quit");
+        Console.WriteLine("1. View Inventory");
+        Console.WriteLine("2. Purchase Inventory (TODO)");
+        Console.WriteLine("3. Set Item Price (TODO)");
+        Console.WriteLine("4. End Cycle (TODO)");
+        Console.WriteLine("5. Save Game (TODO)");
+        Console.WriteLine("6. Load Game (TODO)");
+        Console.WriteLine("7. Quit");
 
         ExicuteMenu(int.Parse(Console.ReadLine()));
     }
 
     private void ExicuteMenu(int response) {
+        Console.Clear();
         switch (response) {
             case 1:
-            PurchaseInventory(); return;
+            ViewInventory(); return;
             case 2:
-            SetRetailPrice(); return;
+            PurchaseInventory(); return;
             case 3:
-            EndCycle(); return;
+            SetRetailPrice(); return;
             case 4:
-            Save(); return;
+            EndCycle(); return;
             case 5:
-            Load(); return;
+            Save(); return;
             case 6:
+            Load(); return;
+            case 7:
             Environment.Exit(1);
             return;
         }
     }
+    private void ViewInventory() {
+        _items.Display();
+    }
 
     private void PurchaseInventory() {
-        throw new NotImplementedException();
+        int itemToBuy = _items.SelectItem();
+        _items.Purchase(itemToBuy);
     }
 
     private void SetRetailPrice() {

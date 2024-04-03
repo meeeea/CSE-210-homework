@@ -5,8 +5,13 @@ class ItemManager {
         get => items[i];
     }
     
-    public ItemManager() {
-        items = SaverLoader.OpemItems();
+    public ItemManager(List<Item> newItems = null) {
+        if (newItems == null) {
+            items = SaverLoader.OpenItems();
+        }
+        else {
+            items = newItems;
+        }
     }
 
     public int SelectItem() {
@@ -16,5 +21,13 @@ class ItemManager {
         }
         Console.WriteLine("Select Item Number");
         return int.Parse(Console.ReadLine()) - 1;
+    }
+
+    public void Purchase(int index) {
+        this[index].Purchase();
+    }
+
+    public void Display() {
+        Console.WriteLine($"{items[0].Display()}");
     }
 }

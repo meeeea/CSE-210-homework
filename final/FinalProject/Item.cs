@@ -1,10 +1,10 @@
 abstract class Item {
-    private string _name;
-    public string Name => _name;
-    private DemandVaryInfo _demand;
-    private int  _inventory;
-    private SuplyVaryInfo _wholeSalePrice;
-    private float _retailPrice;
+    protected string _name;
+    protected string Name => _name;
+    protected DemandVaryInfo _demand;
+    protected int  _inventory;
+    protected SuplyVaryInfo _wholeSalePrice;
+    protected float _retailPrice;
 
     public Item(string name, float wsp, float wsm, float d, float dm,
                 int inventory, float retailPrice) {
@@ -18,4 +18,8 @@ abstract class Item {
     public abstract int CalculateSales();
 
     public abstract string Display();
+
+    public void Purchase() {
+        _inventory++;
+    }
 }

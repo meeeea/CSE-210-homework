@@ -1,10 +1,12 @@
 abstract class VaryInfo {
-    float _baseValue;
-    float _priceChangeModifier;
+    protected float _baseValue;
+    protected float _priceChangeModifier;
 
     public VaryInfo(float baseValue, float modifier) {
         _baseValue = baseValue;
         _priceChangeModifier = modifier;
     }
     public abstract void CalculateMod();
+
+    public abstract string Display();
 }

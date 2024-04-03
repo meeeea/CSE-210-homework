@@ -10,6 +10,7 @@ class TaxableItem : Item {
 
     public override string Display()
     {
-        throw new NotImplementedException();
+        return $"{_name}: {_inventory} in stock, whole sale price: {_wholeSalePrice.Display()}, " +
+             $"retail price: {_retailPrice.ToString("F2")}";
     }
 }

@@ -4,4 +4,8 @@ class DemandVaryInfo : VaryInfo {
     {
         throw new NotImplementedException();
     }
+    public override string Display()
+    {
+        throw new NotImplementedException();
+    }
 }

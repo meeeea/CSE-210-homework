@@ -4,4 +4,8 @@ class SuplyVaryInfo : VaryInfo {
     {
         throw new NotImplementedException();
     }
+
+    public override string Display() {
+        return $"{_baseValue.ToString("F2")}";
+    }
 }
