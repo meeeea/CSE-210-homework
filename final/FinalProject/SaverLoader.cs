@@ -44,12 +44,16 @@ class SaverLoader {
                     string line = reader.ReadLine();
                     if (line == null) {break;}
                     string[] LI = line.Split('|');
+                    Item lineItem;
                     if (LI[7] == "1") {
-                        Item lineItem = new TaxableItem(LI[0], float.Parse(LI[1]), float.Parse(LI[2]),
+                        lineItem = new TaxableItem(LI[0], float.Parse(LI[1]), float.Parse(LI[2]),
                         float.Parse(LI[3]), float.Parse(LI[4]), int.Parse(LI[5]), float.Parse(LI[6]));
-
-                        items.Add(lineItem);
                     }
+                    else {
+                        lineItem = new NonTaxableItem(LI[0], float.Parse(LI[1]), float.Parse(LI[2]),
+                        float.Parse(LI[3]), float.Parse(LI[4]), int.Parse(LI[5]), float.Parse(LI[6]));
+                    }
+                    items.Add(lineItem);
                 }
             }
             return items;
