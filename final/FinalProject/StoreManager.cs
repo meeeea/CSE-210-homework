@@ -53,7 +53,8 @@ class StoreManager {
 
     private void PurchaseInventory() {
         int itemToBuy = _items.SelectItem();
-        _items.Purchase(itemToBuy);
+        Console.WriteLine("How many would you like to purchase? ");
+        _items.Purchase(itemToBuy, int.Parse(Console.ReadLine()));
     }
 
     private void SetRetailPrice() {

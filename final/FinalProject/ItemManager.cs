@@ -47,8 +47,8 @@ class ItemManager {
         return theItems[SelectItem(theItems)];
     }
 
-    public void Purchase(int index) {
-        this[index].Purchase();
+    public void Purchase(int index, int quantity = 1) {
+        this[index].Purchase(quantity);
     }
 
     public void Display() {

@@ -8,4 +8,8 @@ class SuplyVaryInfo : VaryInfo {
     public override string Display() {
         return $"{_baseValue:F2}";
     }
+
+    public float Cost() {
+        return _baseValue;
+    }
 }
