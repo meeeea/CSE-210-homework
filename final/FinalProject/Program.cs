@@ -2,9 +2,10 @@ using System;
 
 class Program
 {
+    public static StoreManager storeManager = new StoreManager();
+
     static void Main(string[] args)
     {
-        StoreManager storeManager = new StoreManager();
         storeManager.MainGameLoop();
     }
 }

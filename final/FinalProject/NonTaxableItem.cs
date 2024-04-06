@@ -1,10 +1,18 @@
 class NonTaxableItem : Item {
-    public NonTaxableItem(string name, float wsp, float wsm, float d, float dm,
-                int inventory, float retailPrice) : base(name, wsp, wsm, d, dm,
-                                                    inventory, retailPrice) {}
+    public NonTaxableItem(string name, float wsp, float wsm,
+                             float d, float dm, int inventory, float retailPrice) :
+                            base(name, wsp, wsm, d, dm, inventory, retailPrice) {}
 
-    public override int CalculateSales() {
-        throw new NotImplementedException();
+    public override float CalculateSales() {
+        int quantity = int.Clamp(_demand.QuantityToPurchase(_retailPrice), 0, _inventory);
+        _inventory -= quantity;
+        float total = quantity * _retailPrice;
+        Console.WriteLine($"Number of {_name} sold: {quantity}, TotoalProfit {total:F2}");
+
+        _wholeSalePrice.CalculateMod();
+        _demand.CalculateMod();
+
+        return total;
     }
 
     public override string Display() {

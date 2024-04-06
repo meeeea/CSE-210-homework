@@ -47,8 +47,8 @@ class ItemManager {
         return theItems[SelectItem(theItems)];
     }
 
-    public void Purchase(int index, int quantity = 1) {
-        this[index].Purchase(quantity);
+    public float Purchase(int index, int quantity = 1) {
+        return this[index].Purchase(quantity);
     }
 
     public void Display() {
@@ -60,6 +60,31 @@ class ItemManager {
     public void Save(StreamWriter writer) {
         foreach (Item item in items) {
             writer.WriteLine(item.Save());
+        }
+    }
+
+    public float CalculateSales() {
+        float total = 0;
+        foreach (Item item in items) {
+            total += item.CalculateSales();
+        }
+        return total;
+    }
+
+    public float QuotePrice(int index, int quantity = 1) {
+        return this[index].Cost * quantity;
+    }
+
+    public void DisplayInventory() {
+        bool emptyInventory = true;
+        foreach (Item item in items) {
+            if (item.InStock) {
+                Console.WriteLine(item.Display());
+                emptyInventory = false;
+            }
+        }
+        if (emptyInventory) {
+            Console.WriteLine("It apears that you have nothing in invntory");
         }
     }
 }

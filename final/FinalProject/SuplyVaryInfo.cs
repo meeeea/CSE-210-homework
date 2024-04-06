@@ -1,8 +1,11 @@
 class SuplyVaryInfo : VaryInfo {
-    public SuplyVaryInfo(float baseValue, float modifier) : base(baseValue, modifier) {}
+    public SuplyVaryInfo(float baseValue, float modifier, float elacticity = 1) : 
+                            base(baseValue, modifier, elacticity) {}
+
     public override void CalculateMod()
     {
-        throw new NotImplementedException();
+        _baseValue += new Random(Seed).Next(-1,1) * _priceChangeModifier;
+        _elacticity += (float) Math.Sqrt(new Random(Seed).Next(-1,1)) / 2;
     }
 
     public override string Display() {

@@ -1,12 +1,24 @@
+using System.ComponentModel.Design.Serialization;
 using System.Text.RegularExpressions;
 
 class StoreManager {
     private ItemManager _items = new ItemManager();
     public ItemManager Items => _items;
-
+    public float money = 1000.00F;
+    public float Scale => _cycle ^ 2 / 10;
+    private float _taxRate = .0825F;
+    public float TaxRate => _taxRate;
+    private int _cycle = 1;
+    public int Cycle => _cycle;
+    private int _seed = new Random().Next();
+    public int Seed => _seed;
     public StoreManager() {}
-    public StoreManager(ItemManager itemManager) {
+    public StoreManager(string[] globals, ItemManager itemManager) {
         _items = itemManager;
+        _cycle = int.Parse(globals[0]);
+        money = float.Parse(globals[1]);
+        _taxRate = float.Parse(globals[2]);
+        _seed = int.Parse(globals[3]);
     }
 
     public void MainGameLoop() {
@@ -24,11 +36,15 @@ class StoreManager {
         Console.WriteLine("6. Load Game");
         Console.WriteLine("7. Quit");
 
-        ExicuteMenu(int.Parse(Console.ReadLine()));
+        try {
+            ExicuteMenu(int.Parse(Console.ReadLine()));
+        }
+        catch {
+            Console.WriteLine("Sorry, something went wrong, Try again.");
+        }
     }
 
     private void ExicuteMenu(int response) {
-        Console.Clear();
         switch (response) {
             case 1:
             ViewInventory(); return;
@@ -47,14 +63,20 @@ class StoreManager {
             return;
         }
     }
+
     private void ViewInventory() {
-        _items.Display();
+        Console.WriteLine($"{money:F2}");
+        _items.DisplayInventory();
     }
 
     private void PurchaseInventory() {
         int itemToBuy = _items.SelectItem();
-        Console.WriteLine("How many would you like to purchase? ");
-        _items.Purchase(itemToBuy, int.Parse(Console.ReadLine()));
+        Console.WriteLine($"How many would you like to purchase at {_items.QuotePrice(itemToBuy):F2}");
+        int quantity = int.Parse(Console.ReadLine());
+        if (_items.QuotePrice(itemToBuy, quantity) > money) {
+            Console.WriteLine("Sorry, you can not afford that much");
+        }
+        money -= _items.Purchase(itemToBuy, quantity);
     }
 
     private void SetRetailPrice() {
@@ -66,12 +88,24 @@ class StoreManager {
         }
         
         Console.WriteLine(item.Display());
-        Console.WriteLine("Set Retail Price (excluding tax).");
-        item.SetRetailPrice(float.Parse(Console.ReadLine()));
+        Console.WriteLine("Set Retail Price (excluding tax if applicable).");
+        item.SetRetailPrice(float.Parse("0" + Console.ReadLine()));
     }
 
     private void EndCycle() {
-        throw new NotImplementedException();
+        Console.WriteLine($"End of cycle {_cycle}");
+        money += _items.CalculateSales();
+        
+        float rent = 10 * Scale;
+        if (rent > money) {
+            Console.WriteLine("sorry, you couldn't pay rent.");
+            GameOver();
+        }
+        Console.WriteLine($"Rent ${rent}");
+        money -= rent;
+        
+        _cycle += 1;
+        Console.WriteLine($"Begining of cycle {_cycle}");
     }
 
     private void Save() {
@@ -81,5 +115,9 @@ class StoreManager {
     private void Load() {
         StoreManager newSave = SaverLoader.Load();
         _items = newSave._items;
+    }
+
+    public void GameOver() {
+        throw new NotImplementedException();
     }
 }

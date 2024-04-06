@@ -1,10 +1,9 @@
-using System.Runtime.CompilerServices;
-
 class SaverLoader {
     public static void Save(StoreManager storeManager) {
         Console.WriteLine("Input Save Name");
         string FileLocation = Console.ReadLine();
         using (StreamWriter writer = File.CreateText($"saves\\{FileLocation}")) {
+            writer.WriteLine($"{storeManager.Cycle}|{storeManager.money}|{storeManager.TaxRate}|{storeManager.Seed}");
             storeManager.Items.Save(writer);
         }
     }
@@ -15,6 +14,7 @@ class SaverLoader {
             string FileLocation = Console.ReadLine();
             List<Item> items = new List<Item>();
             using (StreamReader reader = File.OpenText($"saves\\{FileLocation}.txt")) {
+                string[] firstLine = reader.ReadLine().Split('|');
                 while (true) {
                     string line = reader.ReadLine();
                     if (line == null) {break;}
@@ -30,8 +30,8 @@ class SaverLoader {
                     }
                     items.Add(lineItem);
                 }
+                return new StoreManager(firstLine, new ItemManager(items));
             }
-            return new StoreManager(new ItemManager(items));
         }
         catch (FileNotFoundException) {
             Console.WriteLine("Could not find save file in saves folder, please" +
@@ -44,6 +44,7 @@ class SaverLoader {
         try {
             List<Item> items = new List<Item>();
             using (StreamReader reader = File.OpenText("Dependencies\\Items.txt")) {
+                reader.ReadLine();
                 while (true) {
                     string line = reader.ReadLine();
                     if (line == null) {break;}
