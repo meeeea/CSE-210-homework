@@ -5,8 +5,14 @@ class DemandVaryInfo : VaryInfo {
                             base(baseValue, modifier) {}
     
     public int QuantityToPurchase(float price) {
-        float quantityBase = (price - _baseValue) / (_baseValue * _elacticity) + Scale;
-        return (int)Math.Round(quantityBase * quantityBase);
+        try {
+            float quantityBase = (price - _baseValue) / (_baseValue * _elacticity) + Scale;        
+            return (int)Math.Round(quantityBase * quantityBase);        
+        }
+        catch (DivideByZeroException) {
+            float quantityBase = (float) ((price - _baseValue) / .001 + Scale);        
+            return (int) Math.Round(quantityBase * quantityBase);
+        }
     }
 
     public override void CalculateMod() {
