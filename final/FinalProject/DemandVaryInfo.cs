@@ -10,8 +10,8 @@ class DemandVaryInfo : VaryInfo {
     }
 
     public override void CalculateMod() {
-        _baseValue += new Random(Seed).Next(-1,1) * _priceChangeModifier;
-        _elacticity += (float) Math.Sqrt(new Random(Seed).Next(-1,1)) / 2;
+        _baseValue += RandomGen() * _priceChangeModifier;
+        _elacticity += (float) Math.Sqrt(RandomGen()) / 2;
     }
     public override string Display() {
         throw new NotImplementedException();

@@ -4,7 +4,8 @@ using System.Text.RegularExpressions;
 class StoreManager {
     private ItemManager _items = new ItemManager();
     public ItemManager Items => _items;
-    public float money = 1000.00F;
+    private float _money = 1000.00F;
+    public float Money => _money;
     public float Scale => _cycle ^ 2 / 10;
     private float _taxRate = .0825F;
     public float TaxRate => _taxRate;
@@ -16,7 +17,7 @@ class StoreManager {
     public StoreManager(string[] globals, ItemManager itemManager) {
         _items = itemManager;
         _cycle = int.Parse(globals[0]);
-        money = float.Parse(globals[1]);
+        _money = float.Parse(globals[1]);
         _taxRate = float.Parse(globals[2]);
         _seed = int.Parse(globals[3]);
     }
@@ -45,6 +46,7 @@ class StoreManager {
     }
 
     private void ExicuteMenu(int response) {
+        Console.Clear();
         switch (response) {
             case 1:
             ViewInventory(); return;
@@ -65,7 +67,7 @@ class StoreManager {
     }
 
     private void ViewInventory() {
-        Console.WriteLine($"{money:F2}");
+        Console.WriteLine($"{_money:F2}");
         _items.DisplayInventory();
     }
 
@@ -73,10 +75,10 @@ class StoreManager {
         int itemToBuy = _items.SelectItem();
         Console.WriteLine($"How many would you like to purchase at {_items.QuotePrice(itemToBuy):F2}");
         int quantity = int.Parse(Console.ReadLine());
-        if (_items.QuotePrice(itemToBuy, quantity) > money) {
+        if (_items.QuotePrice(itemToBuy, quantity) > _money) {
             Console.WriteLine("Sorry, you can not afford that much");
         }
-        money -= _items.Purchase(itemToBuy, quantity);
+        _money -= _items.Purchase(itemToBuy, quantity);
     }
 
     private void SetRetailPrice() {
@@ -94,15 +96,15 @@ class StoreManager {
 
     private void EndCycle() {
         Console.WriteLine($"End of cycle {_cycle}");
-        money += _items.CalculateSales();
+        _money += _items.CalculateSales();
         
-        float rent = 10 * Scale;
-        if (rent > money) {
+        float rent = Scale + 10;
+        if (rent > _money) {
             Console.WriteLine("sorry, you couldn't pay rent.");
             GameOver();
         }
         Console.WriteLine($"Rent ${rent}");
-        money -= rent;
+        _money -= rent;
         
         _cycle += 1;
         Console.WriteLine($"Begining of cycle {_cycle}");

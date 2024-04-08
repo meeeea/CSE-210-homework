@@ -2,8 +2,8 @@ class SaverLoader {
     public static void Save(StoreManager storeManager) {
         Console.WriteLine("Input Save Name");
         string FileLocation = Console.ReadLine();
-        using (StreamWriter writer = File.CreateText($"saves\\{FileLocation}")) {
-            writer.WriteLine($"{storeManager.Cycle}|{storeManager.money}|{storeManager.TaxRate}|{storeManager.Seed}");
+        using (StreamWriter writer = File.CreateText($"saves\\{FileLocation}.txt")) {
+            writer.WriteLine($"{storeManager.Cycle}|{storeManager.Money}|{storeManager.TaxRate}|{storeManager.Seed}");
             storeManager.Items.Save(writer);
         }
     }
@@ -34,7 +34,7 @@ class SaverLoader {
             }
         }
         catch (FileNotFoundException) {
-            Console.WriteLine("Could not find save file in saves folder, please" +
+            Console.WriteLine("Could not find save file in saves folder, please " +
                                 "ensure that you have FinalProject as your root forlder");
             return new StoreManager();
         }
@@ -64,7 +64,7 @@ class SaverLoader {
             return items;
         }
         catch (FileNotFoundException) {
-            Console.WriteLine("Could not find Items.txt in Dependencies folder," +
+            Console.WriteLine("Could not find Items.txt in Dependencies folder, " +
                                 "ensure that you have FinalProject as your root forlder");
             Environment.Exit(2);
             return new List<Item>();
