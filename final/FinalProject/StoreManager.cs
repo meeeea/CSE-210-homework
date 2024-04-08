@@ -32,7 +32,7 @@ class StoreManager {
         Console.WriteLine("1. View Inventory");
         Console.WriteLine("2. Purchase Inventory");
         Console.WriteLine("3. Set Item Price");
-        Console.WriteLine("4. End Cycle (TODO)");
+        Console.WriteLine("4. End Cycle");
         Console.WriteLine("5. Save Game");
         Console.WriteLine("6. Load Game");
         Console.WriteLine("7. Quit");

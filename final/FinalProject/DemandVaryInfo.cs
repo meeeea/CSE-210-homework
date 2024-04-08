@@ -14,6 +14,6 @@ class DemandVaryInfo : VaryInfo {
         _elacticity += (float) Math.Sqrt(RandomGen()) / 2;
     }
     public override string Display() {
-        throw new NotImplementedException();
+        return "This function is never called";
     }
 }
