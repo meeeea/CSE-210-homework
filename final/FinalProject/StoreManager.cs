@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 class StoreManager {
     private ItemManager _items = new ItemManager();
     public ItemManager Items => _items;
-    private float _money = 1000.00F;
+    private float _money = 100.00F;
     public float Money => _money;
     public float Scale => _cycle ^ 2 / 10;
     private float _taxRate = .0825F;
@@ -98,10 +98,9 @@ class StoreManager {
         Console.WriteLine($"End of cycle {_cycle}");
         _money += _items.CalculateSales();
         
-        float rent = Scale + 10;
+        float rent = (float) (Scale + Math.Pow(Scale, 2)) / 1000 + 5;
         if (rent > _money) {
-            Console.WriteLine("sorry, you couldn't pay rent.");
-            GameOver();
+            GameOver(rent);
         }
         Console.WriteLine($"Rent ${rent}");
         _money -= rent;
@@ -119,7 +118,9 @@ class StoreManager {
         _items = newSave._items;
     }
 
-    public void GameOver() {
-        throw new NotImplementedException();
+    public void GameOver(float rent) {
+        Console.WriteLine($"Sorry, you couldn't pay rent by {Money - rent}.");
+        Console.WriteLine($"Your store lasted {Cycle} cycles");
+        Console.WriteLine("Thank You For Playing");
     }
 }
