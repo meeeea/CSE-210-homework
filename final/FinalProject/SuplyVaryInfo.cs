@@ -10,7 +10,5 @@ class SuplyVaryInfo : VaryInfo {
         return $"{_baseValue:F2}";
     }
 
-    public float Cost() {
-        return _baseValue;
-    }
+    public float Cost => _baseValue;
 }

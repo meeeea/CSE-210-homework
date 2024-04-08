@@ -1,5 +1,5 @@
 abstract class VaryInfo {
-    protected static Random random = new Random(Seed);
+    protected static Random TheRandom = new Random(Seed);
     protected float _baseValue;
     protected float _priceChangeModifier;
     protected float _elacticity;
@@ -18,7 +18,7 @@ abstract class VaryInfo {
     }
 
     protected static float RandomGen() {
-        double next = random.NextDouble();
+        double next = TheRandom.NextDouble();
         return (float) (-1 + (next * 2));
     }
 }

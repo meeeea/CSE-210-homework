@@ -13,6 +13,7 @@ class StoreManager {
     public int Cycle => _cycle;
     private int _seed = new Random().Next();
     public int Seed => _seed;
+    
     public StoreManager() {}
     public StoreManager(string[] globals, ItemManager itemManager) {
         _items = itemManager;

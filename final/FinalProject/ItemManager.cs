@@ -1,22 +1,19 @@
 class ItemManager {
-    public List<Item> items = new List<Item>();
+    private List<Item> _items = new List<Item>();
 
     public Item this[int i] {
-        get => items[i];
+        get => _items[i];
     }
-    
-    public ItemManager(List<Item> newItems = null) {
-        if (newItems == null) {
-            items = SaverLoader.OpenItems();
-        }
-        else {
-            items = newItems;
-        }
+    public ItemManager() {
+        _items = SaverLoader.OpenItems();
+    }
+    public ItemManager(List<Item> newItems) {
+        _items = newItems;
     }
 
     public int SelectItem() {
         int itemNumber = 1;
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             Console.WriteLine($"{itemNumber}. {item.Display()}");
             itemNumber++;
         }
@@ -36,7 +33,7 @@ class ItemManager {
 
     public Item SelectItemInInventory() {
         List<Item> theItems = new List<Item>();
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             if (item.InStock) {
                 theItems.Add(item);
             }
@@ -52,20 +49,20 @@ class ItemManager {
     }
 
     public void Display() {
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             Console.WriteLine(item.Display());
         }
     }
 
     public void Save(StreamWriter writer) {
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             writer.WriteLine(item.Save());
         }
     }
 
     public float CalculateSales() {
         float total = 0;
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             total += item.CalculateSales();
         }
         return total;
@@ -77,7 +74,7 @@ class ItemManager {
 
     public void DisplayInventory() {
         bool emptyInventory = true;
-        foreach (Item item in items) {
+        foreach (Item item in _items) {
             if (item.InStock) {
                 Console.WriteLine(item.Display());
                 emptyInventory = false;

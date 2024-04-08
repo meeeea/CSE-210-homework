@@ -5,7 +5,7 @@ abstract class Item {
     protected int  _inventory;
     public bool InStock => _inventory > 0;
     protected SuplyVaryInfo _wholeSalePrice;
-    public float Cost => _wholeSalePrice.Cost();
+    public float Cost => _wholeSalePrice.Cost;
     protected float _retailPrice;
 
     public Item(string name, float wsp, float wsm, float d, float dm,
