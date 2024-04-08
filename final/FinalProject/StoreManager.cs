@@ -77,6 +77,11 @@ class StoreManager {
         int quantity = int.Parse(Console.ReadLine());
         if (_items.QuotePrice(itemToBuy, quantity) > _money) {
             Console.WriteLine("Sorry, you can not afford that much");
+            return;
+        }
+        else if (quantity < 1) {
+            Console.WriteLine("Quantity must be positive.");
+            return;
         }
         _money -= _items.Purchase(itemToBuy, quantity);
     }

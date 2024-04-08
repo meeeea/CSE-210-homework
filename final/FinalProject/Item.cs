@@ -29,6 +29,10 @@ abstract class Item {
     }
 
     public void SetRetailPrice(float price) {
+        if (price <= 0) {
+            Console.WriteLine("Please input a positive number.");
+            return;
+        }
         _retailPrice = price;
     }
 }

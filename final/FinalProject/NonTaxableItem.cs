@@ -16,7 +16,7 @@ class NonTaxableItem : Item {
     }
 
     public override string Display() {
-        return  $"{_name}:".PadLeft(15) + $" {_inventory} in stock, whole sale price: "+ 
+        return  $"{_name}:".PadLeft(25) + $" {_inventory} in stock, whole sale price: "+ 
             $"{_wholeSalePrice.Display()}, retail price: {_retailPrice:F2}.";
     }
 
