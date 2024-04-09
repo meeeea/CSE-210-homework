@@ -25,7 +25,7 @@ abstract class Item {
 
     public float Purchase(int quantity = 1) {
         _inventory += quantity;
-        return quantity * _wholeSalePrice.Cost();
+        return quantity * _wholeSalePrice.Cost;
     }
 
     public void SetRetailPrice(float price) {
