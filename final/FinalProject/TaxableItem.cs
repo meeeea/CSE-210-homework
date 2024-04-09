@@ -6,6 +6,7 @@ class TaxableItem : Item {
                         base(name, wsp, wsm, d, dm, inventory, retailPrice) {}
 
     public override float CalculateSales() {
+        if (!InStock) {return 0.0F;}
         int quantity = int.Clamp(_demand.QuantityToPurchase(_retailPrice * (TaxRate + 1)), 0, _inventory);        
         _inventory -= quantity;
 
