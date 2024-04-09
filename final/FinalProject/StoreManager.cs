@@ -120,13 +120,22 @@ class StoreManager {
     }
 
     private void Load() {
-        StoreManager newSave = SaverLoader.Load();
-        _items = newSave._items;
+        StoreManager storeManager = SaverLoader.Load();
+        this.Copy(storeManager);
     }
 
     public void GameOver(float rent) {
-        Console.WriteLine($"Sorry, you couldn't pay rent by {Money - rent}.");
-        Console.WriteLine($"Your store lasted {Cycle} cycles");
+        Console.WriteLine($"Sorry, you couldn't pay rent by {rent - Money:F2}.");
+        Console.WriteLine($"Your store lasted {Cycle} cycles.");
         Console.WriteLine("Thank You For Playing");
+        Environment.Exit(1);
+    }
+    
+    private void Copy(StoreManager storeManager) {
+        _cycle = storeManager.Cycle;
+        _items = storeManager.Items;
+        _money = storeManager.Money;
+        _seed = storeManager.Seed;
+        _taxRate = storeManager.TaxRate;
     }
 }
