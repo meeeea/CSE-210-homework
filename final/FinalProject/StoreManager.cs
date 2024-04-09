@@ -108,7 +108,7 @@ class StoreManager {
         if (rent > _money) {
             GameOver(rent);
         }
-        Console.WriteLine($"Rent ${rent}");
+        Console.WriteLine($"Rent ${rent:F2}");
         _money -= rent;
         
         _cycle += 1;
